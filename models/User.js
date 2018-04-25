@@ -14,7 +14,6 @@ module.exports = (sequelize, dataTypes) => {
       allowNull: false,
       validate: {
         isEmail: {
-          args: true,
           msg: 'Please enter a valid email',
         },
       },
@@ -36,6 +35,9 @@ module.exports = (sequelize, dataTypes) => {
     password: {
       type: dataTypes.STRING,
       allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
   });
 
