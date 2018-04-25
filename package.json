@@ -2,6 +2,10 @@
   "name": "node-exam",
   "version": "0.1.0",
   "description": "Full-stack Express application using PostgreSQL",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:VilhelmNielsen/node-exam"
+  },
   "main": "start.js",
   "engines": {
     "node": "^9.11.1"
