@@ -9,7 +9,7 @@ const app = require('./app');
 app.set('port', port);
 
 const options = {
-  force: false, // drop existing tables if they exist
+  force: false, // TRUE: drop existing tables if they exist
 };
 
 models.sequelize.sync(options).then(() => {
