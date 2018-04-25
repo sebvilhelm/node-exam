@@ -25,19 +25,15 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "knex": "^0.14.6",
-    "objection": "^1.1.7",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
     "pug": "^2.0.3",
     "sequelize": "^4.37.6",
-    "socket.io": "^2.1.0",
-    "validator": "^9.4.1"
+    "socket.io": "^2.1.0"
   },
   "devDependencies": {
-    "nodemon": "^1.17.3",
-    "sqlite3": "^4.0.0"
+    "nodemon": "^1.17.3"
   }
 }
