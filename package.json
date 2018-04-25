@@ -1,7 +1,7 @@
 {
   "name": "node-exam",
   "version": "0.1.0",
-  "description": "",
+  "description": "Full-stack Express application using PostgreSQL",
   "main": "start.js",
   "engines": {
     "node": "^9.11.1"
