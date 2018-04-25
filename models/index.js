@@ -27,6 +27,7 @@ const models = {
 };
 
 Object.keys(models).forEach(modelName => {
+  // If a model has an association, create an association
   if (models[modelName].associate) {
     models[modelName].associate(models);
   }
