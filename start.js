@@ -9,11 +9,14 @@ const app = require('./app');
 app.set('port', port);
 
 const options = {
-  force: false, // TRUE: drop existing tables if they exist
+  force: true, // TRUE: drop existing tables if they exist
 };
 
-models.sequelize.sync(options).then(() => {
-  app.listen(app.get('port'), () => {
-    console.log(`Express is running on port ${port}`);
-  });
-});
+models.sequelize
+  .sync(options)
+  .then(() => {
+    app.listen(app.get('port'), () => {
+      console.log(`Express is running on port ${port}`);
+    });
+  })
+  .catch(err => console.log("couldn't connect to database", err));
