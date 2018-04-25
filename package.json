@@ -11,8 +11,7 @@
     "node": "^9.11.1"
   },
   "scripts": {
-    "migrate": "knex migrate:latest",
-    "start": "npm run migrate && nodemon start.js"
+    "start": "nodemon start.js"
   },
   "keywords": [
     "express",
@@ -29,7 +28,9 @@
     "objection": "^1.1.7",
     "passport": "^0.4.0",
     "pg": "^7.4.1",
+    "pg-hstore": "^2.3.2",
     "pug": "^2.0.3",
+    "sequelize": "^4.37.6",
     "socket.io": "^2.1.0",
     "validator": "^9.4.1"
   },
