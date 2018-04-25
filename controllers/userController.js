@@ -6,12 +6,10 @@ exports.registerForm = (req, res) => {
 };
 
 exports.addUser = async (req, res) => {
-  /* const user = await User.create({
-    firstName: 'Sylvester',
-    lastName: 'Loller',
-  }); */
-  const user = await User.create(req.body);
-  res.json(user);
+  const user = Object.assign(req.body, {});
+  console.log(user);
+  // await User.create(req.body);
+  res.redirect('/register');
 };
 
 exports.getUsers = async (req, res) => {
