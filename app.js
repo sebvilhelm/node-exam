@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const { User } = require('./models');
 const routes = require('./routes');
 
 const errorHandler = require('./handlers/errorHandler');
@@ -24,6 +25,8 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// require('./handlers/passport')(passport, User);
 
 app.use(passport.initialize());
 app.use(passport.session());

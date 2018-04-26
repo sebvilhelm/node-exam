@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const passportLocalSequelize = require('passport-local-sequelize');
 // Change sequelize promises from Bluebird to native promises
 Sequelize.Promise = global.Promise;
 

@@ -1,19 +1,15 @@
-const bCrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 
 module.exports = (passport, User) => {
-  passport.use(
-    'local-signup',
-    new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, (req, done) => {
-      generateHash = password => bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+  passport.serializeUser((user, done) => done(null, user.id));
 
-      User.findOne({ email: req.body.email }).then(user => {
-        if (user) {
-          done(null, false, { message: 'There is already a user with that email' });
-        } else (
-          
-        )
-      });
-    })
-  );
+  passport.deserializeUser((id, done) => {
+    User.findById(id).then(user => {
+      if (user) {
+        return done(null, user.get());
+      }
+      done(user.errors, null);
+    });
+  });
 };

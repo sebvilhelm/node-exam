@@ -1,4 +1,4 @@
-// const User = require('../models/User');
+const passport = require('passport');
 const { User } = require('../models');
 
 exports.registerForm = (req, res) => {
@@ -6,10 +6,10 @@ exports.registerForm = (req, res) => {
 };
 
 exports.addUser = async (req, res) => {
-  const user = Object.assign(req.body, {});
-  console.log(user);
-  // await User.create(req.body);
-  res.redirect('/register');
+  const user = new User(req.body);
+  const createdUser = await User.register(user, req.body.password);
+  console.log(createdUser);
+  res.redirect('/users');
 };
 
 exports.getUsers = async (req, res) => {
