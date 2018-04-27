@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const flash = require('connect-flash');
 const passport = require('passport');
 const { User } = require('./models');
 const routes = require('./routes');
@@ -23,12 +24,20 @@ app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(flash());
+
+// Expose variable to all templates
+app.use((req, res, next) => {
+  res.locals.flashes = req.flash();
+  next();
+});
 
 // Set up routes
 app.use('/', routes);
