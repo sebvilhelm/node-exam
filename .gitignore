@@ -102,3 +102,4 @@ typings/
 
 
 dev.sqlite3
+.vscode/settings.json
