@@ -83,27 +83,30 @@ module.exports = (sequelize, dataTypes) => {
     });
   };
 
-  User.authenticate = async function(email, password, done) {
-    try {
-      const user = await this.findOne({ where: { email } });
-      const passwordMatch = await bcrypt.compare(password, user.hash);
-      if (passwordMatch) {
-        return done(null, user);
+  User.authenticate = function() {
+    return async (email, password, done) => {
+      try {
+        const user = await this.findOne({ where: { email } });
+        const passwordMatch = await bcrypt.compare(password, user.hash);
+        if (passwordMatch) {
+          return done(null, user);
+        }
+        return done(null, false);
+      } catch (err) {
+        console.log(err);
+        return done(err, undefined);
       }
-      return done(null, false);
-    } catch (err) {
-      return done(err, undefined);
-    }
+    };
   };
 
   User.serializeUser = function() {
-    return function(user, done) {
+    return (user, done) => {
       done(null, user.id);
     };
   };
 
   User.deserializeUser = function() {
-    return async function(id, done) {
+    return async (id, done) => {
       try {
         const user = await this.findById(id);
         if (user) {
@@ -118,7 +121,10 @@ module.exports = (sequelize, dataTypes) => {
 
   // For initializing passport strategy
   User.createStrategy = function() {
-    return new LocalStrategy({ usernameField: 'email', passwordField: 'hash', session: 'true' }, this.authenticate);
+    return new LocalStrategy(
+      { usernameField: 'email', passwordField: 'password', session: 'true' },
+      this.authenticate()
+    );
   };
 
   return User;
