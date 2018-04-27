@@ -1,16 +1,7 @@
-const bcrypt = require('bcrypt');
-const LocalStrategy = require('passport-local').Strategy;
+const passport = require('passport');
+const { User } = require('../models');
 
-module.exports = (passport, User) => {
-  // TODO: move this to user model
-  passport.serializeUser((user, done) => done(null, user.id));
+passport.use(User.createStrategy());
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => {
-      if (user) {
-        return done(null, user.get());
-      }
-      done(user.errors, null);
-    });
-  });
-};
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());

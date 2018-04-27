@@ -5,6 +5,7 @@ const session = require('express-session');
 const passport = require('passport');
 const { User } = require('./models');
 const routes = require('./routes');
+require('./handlers/passport');
 
 const errorHandler = require('./handlers/errorHandler');
 
@@ -25,8 +26,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-// require('./handlers/passport')(passport, User);
 
 app.use(passport.initialize());
 app.use(passport.session());

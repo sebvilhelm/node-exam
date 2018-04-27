@@ -9,7 +9,7 @@ const app = require('./app');
 app.set('port', port);
 
 const options = {
-  force: true, // TRUE: drop existing tables if they exist
+  force: false, // TRUE: drop existing tables if they exist
 };
 
 models.sequelize

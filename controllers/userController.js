@@ -5,10 +5,18 @@ exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register' });
 };
 
+exports.loginForm = (req, res) => {
+  res.render('login', { title: 'Login' });
+};
+
+exports.login = passport.authenticate('local', {
+  successRedirect: '/users',
+  failureRedirect: '/login',
+});
+
 exports.addUser = async (req, res) => {
   const user = new User(req.body);
-  const createdUser = await User.register(user, req.body.password);
-  console.log(createdUser);
+  await User.register(user, req.body.password);
   res.redirect('/users');
 };
 
