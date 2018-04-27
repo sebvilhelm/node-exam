@@ -10,10 +10,9 @@ exports.loginForm = (req, res) => {
 };
 
 exports.login = passport.authenticate('local', {
-  successRedirect: '/login',
+  successRedirect: '/test',
   failureRedirect: '/login',
   failureFlash: 'Wrong Login!',
-  successFlash: 'You are logged in!',
 });
 
 exports.addUser = async (req, res) => {

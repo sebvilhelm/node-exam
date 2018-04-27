@@ -7,6 +7,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const { User } = require('./models');
 const routes = require('./routes');
+const helpers = require('./helpers');
 require('./handlers/passport');
 
 const errorHandler = require('./handlers/errorHandler');
@@ -39,6 +40,8 @@ app.use(flash());
 // Expose variable to all templates
 app.use((req, res, next) => {
   res.locals.flashes = req.flash();
+  res.locals.user = req.user;
+  res.locals.h = helpers;
   next();
 });
 
