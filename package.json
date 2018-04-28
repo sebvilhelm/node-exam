@@ -5,6 +5,7 @@
   "engines": {
     "node": "^9.11.1"
   },
+  "browserslist": ">0.25%, ie 11, not op_mini all",
   "description": "Full-stack Express application using PostgreSQL",
   "repository": {
     "type": "git",
@@ -38,7 +39,19 @@
     "socket.io": "^2.1.0"
   },
   "devDependencies": {
+    "autoprefixer": "^8.4.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "concurrently": "^3.5.1",
+    "css-loader": "^0.28.11",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.9.0",
     "nodemon": "^1.17.3",
+    "optimize-css-assets-webpack-plugin": "^4.0.0",
+    "postcss-loader": "^2.1.4",
+    "sass-loader": "^7.0.1",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15"
   }
