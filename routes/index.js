@@ -4,18 +4,13 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
+router.get('/', (req, res) => res.render('index', { title: 'Home' }));
+
 router.get('/register', userController.registerForm);
 router.post('/register', catchErrors(userController.addUser));
 router.get('/users', catchErrors(userController.getUsers));
 
 router.get('/login', userController.loginForm);
 router.post('/login', userController.login);
-
-router.get('/test', (req, res) => {
-  if (req.isAuthenticated()) {
-    req.flash('info', 'You are authenticated!');
-  }
-  res.render('layout', { title: 'Test' });
-});
 
 module.exports = router;

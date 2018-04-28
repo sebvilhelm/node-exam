@@ -6,6 +6,17 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title #{title}
   body
+    block header
+      header.header
+        nav.nav
+          ul.menu__list
+            li.menu-item: a(href="/") Home
+            if user
+              li.menu-item: a(href="/register") Register
+              li.menu-item: a(href="/login") Login
+            else
+              li.menu-item: a(href="/logout") Logout
+
     block messages
       if locals.flashes
         .inner
