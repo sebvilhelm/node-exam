@@ -1,6 +1,5 @@
-* {
-  background-color: red;
-  ::selection {
-    color: red;
-  }
-}
+html {box-sizing: border-box}
+
+*,*:before,*:after {box-sizing: inherit}
+
+@import 'partials/header';

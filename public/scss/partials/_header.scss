@@ -1,0 +1,14 @@
+.nav {
+  &__list {
+    list-style: none;
+    display: flex;
+  }
+
+  &__link {
+    padding: 1rem;
+
+    &--active {
+      color: tomato;
+    }
+  }
+}

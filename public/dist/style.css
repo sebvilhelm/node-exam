@@ -1,1 +1,1 @@
-*{background-color:red}* ::-moz-selection{color:red}* ::selection{color:red}
+html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}.nav__list{list-style:none;display:flex}.nav__link{padding:1rem}.nav__link--active{color:tomato}
