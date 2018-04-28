@@ -8,8 +8,7 @@ const router = express.Router();
 router.get('/', (req, res) => res.render('index', { title: 'Home' }));
 
 router.get('/register', userController.registerForm);
-router.post('/register', userController.validateUser, catchErrors(userController.addUser));
-router.get('/users', catchErrors(userController.getUsers));
+router.post('/register', userController.validateUser, catchErrors(userController.registerUser), authController.login);
 
 router.get('/login', userController.loginForm);
 

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 
-const options = {
+const schemaOptions = {
   timestamps: false,
 };
 
@@ -34,45 +34,47 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.STRING,
         unique: true,
         allowNull: false,
-        validate: {
-          isEmail: {
-            msg: 'Please enter a valid email',
-          },
-        },
       },
       phoneNumber: {
         type: dataTypes.STRING,
         unique: true,
         allowNull: false,
         validate: {
-          isNumeric: {
-            msg: 'Phonenumbers can only contain numbers',
-          },
           len: {
             args: [8, 8],
             msg: 'Please enter a valid, danish phone number',
           },
         },
       },
-      hash: {
+      password: {
         type: dataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: true,
+        },
       },
     },
-    options
+    schemaOptions
   );
 
-  User.register = function(user, password) {
+  User.beforeCreate(async user => {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+  });
+
+  User.findUserByEmail = function(email) {
+    return this.findOne({ where: { email } });
+  };
+
+  User.register = function(user) {
     return new Promise(async (resolve, reject) => {
       try {
+        /* Is this neccessary??? */
         const existingUser = await this.findOne({ where: { id: user.id } });
         if (existingUser) {
           reject();
         }
-
-        const salt = await bcrypt.genSalt(10);
-        const hash = await bcrypt.hash(password, salt);
-        user.hash = hash;
+        /* Probably not */
 
         // user has to already be instantiated
         const createdUser = await user.save();
@@ -86,8 +88,8 @@ module.exports = (sequelize, dataTypes) => {
   User.authenticate = function() {
     return async (email, password, done) => {
       try {
-        const user = await this.findOne({ where: { email } });
-        const passwordMatch = await bcrypt.compare(password, user.hash);
+        const user = await this.findUserByEmail(email);
+        const passwordMatch = await bcrypt.compare(password, user.password);
         if (passwordMatch) {
           return done(null, user);
         }

@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const passport = require('passport');
 const { User } = require('./models');
@@ -24,6 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(expressValidator());
+
+app.use(cookieParser());
+
 app.use(
   session({
     secret: process.env.SECRET,
@@ -31,8 +36,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
-app.use(cookieParser());
 
 app.use(passport.initialize());
 app.use(passport.session());
