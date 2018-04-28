@@ -39,9 +39,10 @@ app.use(flash());
 
 // Expose variable to all templates
 app.use((req, res, next) => {
+  res.locals.h = helpers;
   res.locals.flashes = req.flash();
   res.locals.user = req.user;
-  res.locals.h = helpers;
+  res.locals.currentPath = req.path;
   next();
 });
 

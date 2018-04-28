@@ -9,22 +9,22 @@ html(lang="en")
     block header
       header.header
         nav.nav
-          ul.menu__list
-            li.menu-item: a(href="/") Home
+          ul.nav__list
+            li.nav__item: a.nav__link(class=(currentPath.startsWith('') ? 'nav__link--active' : '') href="/") Home
             if user
-              li.menu-item: a(href="/register") Register
-              li.menu-item: a(href="/login") Login
+              li.nav__item: a.nav__link(class=(currentPath.startsWith('/logout') ? 'nav__link--active' : '') href="/logout") Logout
             else
-              li.menu-item: a(href="/logout") Logout
-
+              li.nav__item: a.nav__link(class=(currentPath.startsWith('/login') ? 'nav__link--active' : '') href="/login") Login
+              li.nav__item: a.nav__link(class=(currentPath.startsWith('/register') ? 'nav__link--active' : '') href="/register") Register
+              
     block messages
       if locals.flashes
-        .inner
-          .flash-messages
-            - const categories = Object.keys(locals.flashes)
-            each category in categories
-              each message in flashes[category]
-                .flash(class=`flash--${category}`)
-                  p.flash__text!= message
-                  button.flash__remove(onClick="this.parentElement.remove()") &times;
+        .flash-messages
+          - const categories = Object.keys(locals.flashes)
+          each category in categories
+            each message in flashes[category]
+              .flash(class=`flash--${category}`)
+                p.flash__text!= message
+                button.flash__remove(onClick="this.parentElement.remove()") &times;
+    
     block content
