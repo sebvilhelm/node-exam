@@ -1,4 +1,3 @@
-const passport = require('passport');
 const { User } = require('../models');
 
 exports.registerForm = (req, res) => {
@@ -9,11 +8,10 @@ exports.loginForm = (req, res) => {
   res.render('login', { title: 'Login' });
 };
 
-exports.login = passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/login',
-  failureFlash: 'Wrong Login!',
-});
+exports.validateUser = (req, res, next) => {
+  // do some validation
+  next();
+};
 
 exports.addUser = async (req, res) => {
   const user = new User(req.body);

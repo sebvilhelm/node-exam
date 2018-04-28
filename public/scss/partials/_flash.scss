@@ -1,0 +1,14 @@
+.flash-messages {
+  
+}
+
+.flash {
+  padding: 1rem;
+  border: 1px solid;
+  &--info {
+    border-color: blue;
+  }
+  &--success {
+    border-color: green;
+  }
+}

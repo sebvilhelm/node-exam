@@ -1,1 +1,1 @@
-html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}.nav__list{list-style:none;display:flex}.nav__link{padding:1rem}.nav__link--active{color:tomato}
+html{box-sizing:border-box}*,:after,:before{box-sizing:inherit}.nav__list{list-style:none;display:flex}.nav__link{padding:1rem}.nav__link--active{color:tomato}.flash{padding:1rem;border:1px solid}.flash--info{border-color:blue}.flash--success{border-color:green}
