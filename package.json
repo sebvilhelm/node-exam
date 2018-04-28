@@ -1,17 +1,14 @@
 {
   "name": "node-exam",
   "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": "^9.11.1"
+  },
   "description": "Full-stack Express application using PostgreSQL",
   "repository": {
     "type": "git",
     "url": "https://github.com:VilhelmNielsen/node-exam"
-  },
-  "main": "start.js",
-  "engines": {
-    "node": "^9.11.1"
-  },
-  "scripts": {
-    "start": "nodemon start.js"
   },
   "keywords": [
     "express",
@@ -19,6 +16,11 @@
   ],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "start": "node start.js",
+    "watch": "nodemon start.js --ignore public/",
+    "assets": "webpack"
+  },
   "dependencies": {
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "nodemon": "^1.17.3",
-    "webpack": "^4.6.0"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   }
 }
