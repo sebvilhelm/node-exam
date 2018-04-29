@@ -76,6 +76,7 @@ module.exports = (sequelize, DataTypes) => {
     return new Promise(async (resolve, reject) => {
       try {
         // TODO: Handle if email is already in the system
+        // but maybe not here? Probably controller
 
         // user has to already be instantiated
         const createdUser = await user.save();
