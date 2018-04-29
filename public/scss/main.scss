@@ -1,6 +1,6 @@
-html {box-sizing: border-box}
-
-*,*:before,*:after {box-sizing: inherit}
-
+@import 'partials/layout';
+@import 'partials/variables';
+@import 'partials/buttons';
+@import 'partials/forms';
 @import 'partials/header';
-@import 'partials/flash';
+@import 'partials/flashes';

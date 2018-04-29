@@ -1,0 +1,28 @@
+.flash {
+  display: flex;
+  padding: 1rem;
+  border: 3px solid;
+  border-radius: 10px;
+  box-shadow:
+    2px 2px 5px rgba(0,0,0,0.1),
+    7px 7px 10px rgba(0,0,0,0.05);
+  &--info {
+    border-color: $grey;
+  }
+  &--success {
+    border-color: $green;
+  }
+  &--error{
+    border-color: $red;
+  }
+
+  &__text {
+    flex: 1;
+  }
+
+  &__remove {
+    background: none;
+    border: 0;
+    align-self: flex-start;
+  }
+}

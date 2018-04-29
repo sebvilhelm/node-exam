@@ -12,6 +12,7 @@ html(lang="en")
         nav.nav
           ul.nav__list
             li.nav__item: a.nav__link(class=(currentPath === '/' ? 'nav__link--active' : '') href="/") Home
+            .nav__spacer(aria-hidden="true")
             if user
               li.nav__item: a.nav__link(class=(currentPath.startsWith('/logout') ? 'nav__link--active' : '') href="/logout") Logout
             else
