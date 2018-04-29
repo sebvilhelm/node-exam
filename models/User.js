@@ -34,6 +34,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
+        set(value) {
+          this.setDataValue('email', value.toLowerCase());
+        },
       },
       phoneNumber: {
         type: DataTypes.STRING,
@@ -91,7 +94,6 @@ module.exports = (sequelize, DataTypes) => {
         }
         return done(null, false);
       } catch (err) {
-        console.log(err);
         return done(err, undefined);
       }
     };
