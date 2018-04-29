@@ -26,7 +26,8 @@ exports.validateUser = async (req, res, next) => {
   const errors = req.validationErrors();
   if (errors) {
     req.flash('error', errors.map(err => err.msg));
-    return res.render('register', { title: 'Register', body: req.body, flashes: req.flash() });
+    res.render('register', { title: 'Register', body: req.body, flashes: req.flash() });
+    return;
   }
   next();
 };

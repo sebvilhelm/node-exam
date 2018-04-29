@@ -12,3 +12,12 @@ exports.login = passport.authenticate('local', {
   failureFlash: 'Failed Login!',
   successFlash: 'You are logged in!',
 });
+
+exports.checkLogin = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+    return;
+  }
+  req.flash('error', 'You must be logged in');
+  res.redirect('login');
+};
