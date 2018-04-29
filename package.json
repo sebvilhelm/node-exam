@@ -5,7 +5,7 @@
   "engines": {
     "node": "^9.11.1"
   },
-  "browserslist": ">0.25%, ie 11, not op_mini all",
+  "browserslist": ">0.25%, not ie 11, not op_mini all",
   "description": "Full-stack Express application using PostgreSQL",
   "repository": {
     "type": "git",
