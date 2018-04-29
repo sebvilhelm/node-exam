@@ -6,12 +6,11 @@ const session = require('express-session');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const passport = require('passport');
-const { User } = require('./models');
 const routes = require('./routes');
 const helpers = require('./helpers');
 require('./handlers/passport');
 
-const errorHandler = require('./handlers/errorHandler');
+const errorHandlers = require('./handlers/errorHandlers');
 
 const app = express();
 
@@ -55,6 +54,10 @@ app.use((req, res, next) => {
 app.use('/', routes);
 
 // Pretty Print an error on the front end, if all else fails
-app.use(errorHandler.displayError);
+if (app.get('env') === 'development') {
+  app.use(errorHandlers.developmentErrors);
+}
+
+app.use(errorHandlers.productionErrors);
 
 module.exports = app;
