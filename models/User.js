@@ -72,13 +72,6 @@ module.exports = (sequelize, DataTypes) => {
   User.register = function(user) {
     return new Promise(async (resolve, reject) => {
       try {
-        /* Is this neccessary??? */
-        const existingUser = await this.findOne({ where: { id: user.get('id') } });
-        if (existingUser) {
-          reject();
-        }
-        /* Probably not */
-
         // user has to already be instantiated
         const createdUser = await user.save();
         resolve(createdUser);

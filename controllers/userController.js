@@ -16,9 +16,9 @@ exports.validateUser = async (req, res, next) => {
   req.checkBody('lastName', 'You must supply your last name').notEmpty();
   req.checkBody('email', 'You must supply a valid email').isEmail();
   req.sanitizeBody('email').normalizeEmail({
-    remove_dots: false,
-    remove_extension: false,
     gmail_remove_subaddress: true,
+    gmail_remove_dots: false,
+    remove_extension: false,
   });
   req.sanitizeBody('phoneNumber');
   req.checkBody('phoneNumber', 'Please enter a valid danish phone number').isNumeric();
