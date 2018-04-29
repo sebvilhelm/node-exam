@@ -75,6 +75,8 @@ module.exports = (sequelize, DataTypes) => {
   User.register = function(user) {
     return new Promise(async (resolve, reject) => {
       try {
+        // TODO: Handle if email is already in the system
+
         // user has to already be instantiated
         const createdUser = await user.save();
         resolve(createdUser);
