@@ -53,6 +53,9 @@ app.use((req, res, next) => {
 // Set up routes
 app.use('/', routes);
 
+// 404 for unknown routes
+app.use(errorHandlers.notFound);
+
 // Pretty Print an error on the front end, if all else fails
 if (app.get('env') === 'development') {
   app.use(errorHandlers.developmentErrors);

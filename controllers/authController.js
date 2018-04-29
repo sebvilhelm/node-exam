@@ -13,7 +13,7 @@ exports.login = passport.authenticate('local', {
   successFlash: 'You are logged in!',
 });
 
-exports.checkLogin = (req, res, next) => {
+exports.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     next();
     return;
