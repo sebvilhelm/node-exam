@@ -1,11 +1,25 @@
-input, textarea {
+.form {
+  padding: 2rem;
+}
+
+.input, .textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 1rem;
   border: 1px solid $grey;
   outline: 0;
+  font-size: 1rem;
 
   &:focus {
     border-color: purple;
   }
+
+  &--error {
+    border-color: red;
+  }
+}
+
+.label {
+  font-weight: 600;
+  display: block;
+  margin: 1rem 0;
 }

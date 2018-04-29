@@ -22,6 +22,9 @@ exports.validateUser = async (req, res, next) => {
   });
   req.sanitizeBody('phoneNumber');
   req.checkBody('phoneNumber', 'Please enter a valid danish phone number').isNumeric();
+  req.checkBody('password', 'Please enter a password').notEmpty();
+  req.checkBody('password-confirm', 'Please confirm your password').notEmpty();
+  req.checkBody('password-confirm', "Passwords doesn't match").equals(req.body.password);
 
   const errors = req.validationErrors();
   if (errors) {

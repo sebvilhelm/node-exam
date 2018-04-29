@@ -3,16 +3,18 @@ extends layout
 block content
   - const values = locals.body || {}
   .inner
-    h2 Register user
-    form(action="/register" method="post")
-      label First name
-        input(type="text" name="firstName" value=values.firstName)
-      label Last Name
-        input(type="text" name="lastName" value=values.lastName)
-      label Email
-        input(type="email" name="email" value=values.email)
-      label Phone Number
-        input(type="text" name="phoneNumber" value=values.phoneNumber)
-      label Password
-        input(type="password" name="password")
+    form.form(action="/register" method="post")
+      h2 Register user
+      label.label First name
+        input.input(type="text" name="firstName" value=values.firstName)
+      label.label Last Name
+        input.input(type="text" name="lastName" value=values.lastName)
+      label.label Email
+        input.input(type="email" name="email" value=values.email)
+      label.label Phone Number
+        input.input(type="text" name="phoneNumber" value=values.phoneNumber)
+      label.label Password
+        input.input(type="password" name="password")
+      label.label Confirm Password
+        input.input(type="password" name="password-confirm")
       button.button(type="submit") Register!
