@@ -3,5 +3,6 @@ extends layout
 include mixins/_loginForm
 
 block content
-  h1= title
-  +loginForm()
+  .inner
+    h1= title
+    +loginForm()
