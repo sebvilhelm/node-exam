@@ -6,37 +6,37 @@ const schemaOptions = {
 };
 
 /* Alternative to no timestamps
-const options = {
+const schemaOptions = {
   timestamps: true,
   createdAt: false,
   paranoid: true
 };
 */
 
-module.exports = (sequelize, dataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     'user',
     {
       id: {
-        type: dataTypes.INTEGER,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-        autoIncrement: true,
       },
       firstName: {
-        type: dataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       lastName: {
-        type: dataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       email: {
-        type: dataTypes.STRING,
+        type: DataTypes.STRING,
         unique: true,
         allowNull: false,
       },
       phoneNumber: {
-        type: dataTypes.STRING,
+        type: DataTypes.STRING,
         unique: true,
         allowNull: false,
         validate: {
@@ -47,7 +47,7 @@ module.exports = (sequelize, dataTypes) => {
         },
       },
       password: {
-        type: dataTypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notEmpty: true,
@@ -57,10 +57,13 @@ module.exports = (sequelize, dataTypes) => {
     schemaOptions
   );
 
-  User.beforeCreate(async user => {
+  User.hashPassword = async user => {
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
-  });
+  };
+
+  User.beforeCreate(User.hashPassword);
+  User.beforeUpdate(User.hashPassword);
 
   User.findUserByEmail = function(email) {
     return this.findOne({ where: { email } });
@@ -70,7 +73,7 @@ module.exports = (sequelize, dataTypes) => {
     return new Promise(async (resolve, reject) => {
       try {
         /* Is this neccessary??? */
-        const existingUser = await this.findOne({ where: { id: user.id } });
+        const existingUser = await this.findOne({ where: { id: user.get('id') } });
         if (existingUser) {
           reject();
         }
@@ -89,7 +92,7 @@ module.exports = (sequelize, dataTypes) => {
     return async (email, password, done) => {
       try {
         const user = await this.findUserByEmail(email);
-        const passwordMatch = await bcrypt.compare(password, user.password);
+        const passwordMatch = await bcrypt.compare(password, user.get('password'));
         if (passwordMatch) {
           return done(null, user);
         }
@@ -103,7 +106,7 @@ module.exports = (sequelize, dataTypes) => {
 
   User.serializeUser = function() {
     return (user, done) => {
-      done(null, user.id);
+      done(null, user.get('id'));
     };
   };
 
