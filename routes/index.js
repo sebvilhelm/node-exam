@@ -1,5 +1,5 @@
 const express = require('express');
-const { catchErrors } = require('../handlers/errorHandler');
+const { catchErrors } = require('../handlers/errorHandlers');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 
