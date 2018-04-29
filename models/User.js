@@ -88,6 +88,11 @@ module.exports = (sequelize, DataTypes) => {
     return async (email, password, done) => {
       try {
         const user = await this.findUserByEmail(email);
+
+        if (!user) {
+          done(null, false);
+        }
+
         const passwordMatch = await bcrypt.compare(password, user.get('password'));
         if (passwordMatch) {
           return done(null, user);
