@@ -15,7 +15,7 @@
     "express",
     "nodejs"
   ],
-  "author": "",
+  "author": "Sebastian Nielsen",
   "license": "ISC",
   "scripts": {
     "start": "node start.js",
