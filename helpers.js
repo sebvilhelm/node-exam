@@ -1,1 +1,1 @@
-exports.dump = json => JSON.stringify(json, null, 2);
+exports.dump = obj => JSON.stringify(obj, null, 2);
