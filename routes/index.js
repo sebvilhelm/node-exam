@@ -15,4 +15,7 @@ router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
+router.get('/auth/facebook', authController.facebookAuth);
+router.get('/auth/facebook/callback', (req, res) => res.redirect('/'));
+
 module.exports = router;

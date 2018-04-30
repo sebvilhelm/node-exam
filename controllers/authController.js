@@ -21,3 +21,9 @@ exports.isLoggedIn = (req, res, next) => {
   req.flash('error', 'You must be logged in');
   res.redirect('login');
 };
+
+exports.facebookAuth = passport.authenticate('facebook', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true,
+});
