@@ -26,6 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(expressValidator());
 
+// I'm not sure this does anything
 app.use(cookieParser());
 
 app.use(
