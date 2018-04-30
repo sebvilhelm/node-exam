@@ -1,7 +1,4 @@
-exports.catchErrors = fn =>
-  function(req, res, next) {
-    return fn(req, res, next).catch(next);
-  };
+exports.catchErrors = fn => (req, res, next) => fn(req, res, next).catch(next);
 
 exports.developmentErrors = (err, req, res, next) => {
   err.stack = err.stack || '';
