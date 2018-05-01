@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "^9.11.1"
+    "node": ">=8.11.1"
   },
   "browserslist": ">0.25%, not ie 11, not op_mini all",
   "description": "Full-stack Express application using PostgreSQL",
