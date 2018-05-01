@@ -25,6 +25,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 // Import models
 const models = {
   User: sequelize.import('./User'),
+  Channel: sequelize.import('./Channel'),
 };
 
 Object.keys(models).forEach(modelName => {

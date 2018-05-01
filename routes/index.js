@@ -1,6 +1,7 @@
 const express = require('express');
 const { catchErrors } = require('../handlers/errorHandlers');
 const userController = require('../controllers/userController');
+const chatController = require('../controllers/chatController');
 const authController = require('../controllers/authController');
 
 const router = express.Router();
@@ -14,5 +15,8 @@ router.get('/login', userController.loginForm);
 
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
+
+router.post('/chat', authController.isLoggedIn, catchErrors(chatController.addChat));
+router.get('/chat/:id', catchErrors(chatController.chat));
 
 module.exports = router;
