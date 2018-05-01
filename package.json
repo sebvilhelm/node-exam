@@ -38,7 +38,8 @@
     "pg-hstore": "^2.3.2",
     "pug": "^2.0.3",
     "sequelize": "^4.37.6",
-    "socket.io": "^2.1.0"
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.4.1",

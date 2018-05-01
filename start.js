@@ -1,7 +1,7 @@
 const app = require('./app');
 const models = require('./models');
 const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const io = require('./handlers/websocket');
 // Read dotfile
 require('dotenv').config();
 
@@ -15,6 +15,7 @@ models.sequelize
   .sync(options)
   .then(() => {
     server.listen(port);
+    io.listen(5678);
   })
   .catch(err => console.log("couldn't connect to database", err));
 
