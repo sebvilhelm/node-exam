@@ -5,10 +5,8 @@ block content
   .inner
     form.form(action="/register" method="post")
       h2 Register user
-      label.label First name
-        input.input(type="text" name="firstName" value=values.firstName)
-      label.label Last Name
-        input.input(type="text" name="lastName" value=values.lastName)
+      label.label Full name
+        input.input(type="text" name="name" value=values.name)
       label.label Email
         input.input(type="email" name="email" value=values.email)
       label.label Phone Number

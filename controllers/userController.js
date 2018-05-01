@@ -10,10 +10,8 @@ exports.loginForm = (req, res) => {
 
 exports.validateUser = async (req, res, next) => {
   // Move all the validation out of the model and into here
-  req.sanitizeBody('firstName');
-  req.checkBody('firstName', 'You must supply your first name').notEmpty();
-  req.sanitizeBody('lastName');
-  req.checkBody('lastName', 'You must supply your last name').notEmpty();
+  req.sanitizeBody('name');
+  req.checkBody('name', 'You must supply your full name').notEmpty();
   req.checkBody('email', 'You must supply a valid email').isEmail();
   req.sanitizeBody('email').normalizeEmail({
     gmail_remove_subaddress: true,

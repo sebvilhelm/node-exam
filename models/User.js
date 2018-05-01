@@ -21,19 +21,27 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
-      },
-      firstName: {
-        type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Name cannot be empty',
+          },
+        },
+        // Set names to uppercase
       },
       email: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'Email cannot be empty',
+          },
+        },
         set(value) {
           this.setDataValue('email', value.toLowerCase());
         },
@@ -43,6 +51,9 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         allowNull: false,
         validate: {
+          isNumeric: {
+            msg: 'Phone numbers can only contain numbers',
+          },
           len: {
             args: [8, 8],
             msg: 'Please enter a valid, danish phone number',
@@ -53,7 +64,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true,
+          notEmpty: {
+            msg: 'Password cannot be empty',
+          },
         },
       },
     },
