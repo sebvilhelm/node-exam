@@ -27,10 +27,8 @@ module.exports = (sequelize, DataTypes) => {
   Channel.associate = models => {
     Channel.belongsToMany(models.User, {
       through: 'channel_members',
-      foreignKey: {
-        name: 'id',
-        field: 'channel_id',
-      },
+      foreignKey: 'channel_id',
+      targetKey: 'id',
     });
   };
 

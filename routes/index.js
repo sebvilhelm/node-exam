@@ -16,7 +16,14 @@ router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
-router.post('/chat', authController.isLoggedIn, catchErrors(chatController.addChat));
-router.get('/chat/:id', catchErrors(chatController.chat));
+router.post(
+  '/chat',
+  authController.isLoggedIn,
+  catchErrors(chatController.channelExists),
+  catchErrors(chatController.addChannel)
+);
+router.get('/chat/:id', catchErrors(chatController.showChannel));
+
+router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
 module.exports = router;

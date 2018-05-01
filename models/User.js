@@ -73,6 +73,14 @@ module.exports = (sequelize, DataTypes) => {
     schemaOptions
   );
 
+  /* User.associate = models => {
+    User.belongsToMany(models.Channel, {
+      through: 'channel_members',
+      foreignKey: 'fk_user_id',
+      targetKey: 'id',
+    });
+  }; */
+
   User.hashPassword = async user => {
     user.password = await bcrypt.hash(user.password, 12);
   };

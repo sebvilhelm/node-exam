@@ -1,4 +1,6 @@
-const { User } = require('../models');
+const { User, Sequelize } = require('../models');
+
+const $ = Sequelize.Op;
 
 exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register' });
@@ -37,4 +39,14 @@ exports.registerUser = async (req, res, next) => {
   const user = new User(req.body);
   await User.register(user, req.body.password);
   next();
+};
+
+exports.userList = async (req, res) => {
+  const users = await User.findAll({
+    where: {
+      id: { [$.ne]: req.user.id },
+    },
+    attributes: ['id', 'name'],
+  });
+  res.render('userList', { title: 'Users List', users });
 };
