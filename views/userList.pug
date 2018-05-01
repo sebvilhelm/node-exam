@@ -1,12 +1,13 @@
 extends layout
 
 block content
-  h1 users
-  if users
-    ul
-      each user in users
-        li
-          span= user.name
-            form(action="/chat" method="post")
-              input(type="hidden", name="userId" value=user.id)
-              button.button(type="submit") start chat
+  .inner
+    h1 users
+    if users
+      ul
+        each user in users
+          li
+            span= user.name
+              form(action="/chat" method="post")
+                input(type="hidden", name="userId" value=user.id)
+                button.button(type="submit") start chat

@@ -1,9 +1,23 @@
-const { Channel } = require('../models');
+const { Channel, User, Sequelize } = require('../models');
+
+const $ = Sequelize.Op;
 
 exports.channelExists = async (req, res, next) => {
   // check if channel already exists
-  /* const channel = await Channel.findOne({});
-  if (channel) {
+  const channels = await Channel.findAll({
+    include: [
+      {
+        model: User,
+        where: {
+          id: {
+            [$.in]: [req.user.id, req.body.userId],
+          },
+        },
+      },
+    ],
+  });
+
+  /* if (channel) {
     res.redirect(`chat/${channel.id}`);
     return;
   } */
@@ -19,6 +33,23 @@ exports.addChannel = async (req, res) => {
 
 exports.showChannel = async (req, res) => {
   // TODO: get all messages belonging to the channel
-  const chat = await Channel.findById(req.params.id);
-  res.render('chat', { title: 'Chat with ....' });
+  const chat = await Channel.findOne({
+    where: { id: req.params.id },
+    include: [
+      {
+        model: User,
+        where: {
+          id: {
+            [$.ne]: req.user.id,
+          },
+        },
+      },
+    ],
+  });
+
+  const {
+    users: [{ name }],
+  } = chat;
+
+  res.render('chat', { title: `Chat with ${name}` });
 };
