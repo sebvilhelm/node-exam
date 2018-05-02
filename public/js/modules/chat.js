@@ -1,9 +1,21 @@
 import io from 'socket.io-client';
 
-const chat = io('http://localhost:5678');
+const chatWindow = document.querySelector('#chatWindow');
 
-chat.on('message', ({ from, message }) => {
-  console.log(from, message);
-});
+let chat;
+
+if (chatWindow) {
+  chat = io();
+
+  // console.log(window.location.origin);
+
+  const room = document.querySelector('input[name="channelId"]').value;
+
+  chat.emit('room', room);
+
+  chat.on('message', ({ from, message }) => {
+    console.log(from, message);
+  });
+}
 
 export default chat;

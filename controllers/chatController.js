@@ -4,18 +4,6 @@ const $ = Sequelize.Op;
 
 exports.channelExists = async (req, res, next) => {
   // check if channel already exists
-  const channels = await Channel.findAll({
-    include: [
-      {
-        model: User,
-        where: {
-          id: {
-            [$.in]: [req.user.id, req.body.userId],
-          },
-        },
-      },
-    ],
-  });
 
   /* if (channel) {
     res.redirect(`chat/${channel.id}`);
@@ -51,5 +39,5 @@ exports.showChannel = async (req, res) => {
     users: [{ name }],
   } = chat;
 
-  res.render('chat', { title: `Chat with ${name}` });
+  res.render('chat', { title: `Chat with ${name}`, chat });
 };

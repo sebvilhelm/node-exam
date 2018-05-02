@@ -22,7 +22,7 @@ router.post(
   catchErrors(chatController.channelExists),
   catchErrors(chatController.addChannel)
 );
-router.get('/chat/:id', catchErrors(chatController.showChannel));
+router.get('/chat/:id', authController.isLoggedIn, catchErrors(chatController.showChannel));
 
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 

@@ -1,5 +1,9 @@
-const io = require('socket.io')();
-
-io.on('connection', socket => {});
-
-module.exports = io;
+module.exports = io => {
+  io.on('connect', socket => {
+    // authenticate
+    socket.on('room', room => {
+      socket.join(room);
+      console.log('room', room);
+    });
+  });
+};
