@@ -24,6 +24,8 @@ router.post(
 );
 router.get('/chat/:id', authController.isLoggedIn, catchErrors(chatController.showChannel));
 
+router.post('/chat/:id', chatController.addMessage);
+
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
 module.exports = router;

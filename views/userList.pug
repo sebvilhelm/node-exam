@@ -3,6 +3,7 @@ extends layout
 block content
   .inner
     h1 users
+    p I'm #{user.name}
     if users
       ul
         each user in users

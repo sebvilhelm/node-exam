@@ -41,3 +41,7 @@ exports.showChannel = async (req, res) => {
 
   res.render('chat', { title: `Chat with ${name}`, chat });
 };
+
+exports.addMessage = (req, res) => {
+  res.json(req.body);
+};
