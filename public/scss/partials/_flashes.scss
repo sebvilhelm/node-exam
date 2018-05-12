@@ -1,21 +1,14 @@
 .flash {
   display: flex;
-  background: #fff;
-  padding: 1rem;
   margin: 1rem 0;
-  border: 3px solid;
-  border-radius: 10px;
-  box-shadow:
-    2px 2px 5px rgba(0,0,0,0.1),
-    7px 7px 10px rgba(0,0,0,0.05);
   &--info {
-    border-color: $grey;
+    color: $grey;
   }
   &--success {
-    border-color: $green;
+    color: $green;
   }
   &--error{
-    border-color: $red;
+    color: $red;
   }
 
   &__text {
@@ -23,9 +16,10 @@
   }
 
   &__remove {
+    cursor: pointer;
+    order: -1;
     background: none;
     border: 0;
-    align-self: flex-start;
     font-size: 1rem;
   }
 }
