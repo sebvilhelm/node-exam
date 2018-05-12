@@ -1,13 +1,11 @@
 import io from 'socket.io-client';
 
-const chatWindow = document.querySelector('#chatWindow');
+export default function() {
+  const chatWindow = document.querySelector('#chatWindow');
 
-let chat;
+  if (!chatWindow) return;
 
-if (chatWindow) {
-  chat = io();
-
-  // console.log(window.location.origin);
+  const chat = io();
 
   const room = document.querySelector('input[name="channelId"]').value;
 
@@ -17,5 +15,3 @@ if (chatWindow) {
     console.log(from, message);
   });
 }
-
-export default chat;
