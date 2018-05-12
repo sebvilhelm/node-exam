@@ -24,6 +24,7 @@
     "assets": "webpack -w --display-max-modules 0"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "connect-flash": "^0.1.1",
@@ -49,7 +50,7 @@
     "css-loader": "^0.28.11",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
-    "nodemon": "^1.17.1",
+    "nodemon": "^1.17.4",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "postcss-loader": "^2.1.4",
     "sass-loader": "^7.0.1",
