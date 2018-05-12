@@ -1,4 +1,5 @@
 const { User } = require('../models');
+const mail = require('../handlers/mail');
 
 exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register' });
@@ -37,4 +38,9 @@ exports.registerUser = async (req, res, next) => {
   const user = new User(req.body);
   await User.register(user, req.body.password);
   next();
+};
+
+exports.sendMail = async (req, res) => {
+  await mail.send();
+  res.redirect('/');
 };

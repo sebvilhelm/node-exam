@@ -15,4 +15,6 @@ router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
+router.get('/mail', catchErrors(userController.sendMail));
+
 module.exports = router;
