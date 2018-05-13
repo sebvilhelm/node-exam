@@ -20,3 +20,9 @@ models.sequelize
     });
   })
   .catch(err => console.log("couldn't connect to database", err));
+
+// Crash the server on unhandledRejection
+// instead of failing silently
+process.on('unhandledRejection', err => {
+  throw err;
+});
