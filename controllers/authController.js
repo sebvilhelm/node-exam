@@ -21,3 +21,14 @@ exports.isLoggedIn = (req, res, next) => {
   req.flash('error', 'You must be logged in');
   res.redirect('login');
 };
+
+exports.googleAuth = passport.authenticate('google', {
+  scope: ['profile', 'email'],
+});
+
+exports.googleAuthCallback = passport.authenticate('google', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: 'Login failed!',
+  successFlash: 'You are logged in!',
+});

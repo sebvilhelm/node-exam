@@ -18,6 +18,9 @@ router.post(
   authController.login
 );
 
+router.get('/auth/google', authController.googleAuth);
+router.get('/auth/google/callback', authController.googleAuthCallback);
+
 router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
