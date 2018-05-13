@@ -2,13 +2,14 @@ extends layout
 
 block content
   .inner
-    h1 users
-    p I'm #{user.name}
-    if users
-      ul
+    h1 Users
+    if users.length > 0
+      ul.user-list
         each user in users
-          li
-            span= user.name
+          li.user-list__item
+            .user-card
+              h2.user-card__title= user.name
+              img.user-card__avatar(src=`/uploads/users/${user.photo}` alt=`${user.name} portrait`)
               form(action="/chat" method="post")
                 input(type="hidden", name="userId" value=user.id)
-                button.button(type="submit") start chat
+                button.button(type="submit") Start chat

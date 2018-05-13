@@ -1,0 +1,29 @@
+.user-list {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  &__item {
+    display: contents;
+  }
+}
+
+.user-card {
+  padding: 1rem;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+
+  &__title {
+    flex: 1;
+  }
+
+  &__avatar {
+    order: -1;
+    height: 75px;
+    margin-right: 1.5rem;
+    border-radius: 50%;
+  }
+}

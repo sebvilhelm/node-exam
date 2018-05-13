@@ -76,10 +76,10 @@ exports.registerUser = async (req, res, next) => {
 
 exports.userList = async (req, res) => {
   const users = await User.findAll({
-    where: {
+    /* where: {
       id: { [$.ne]: req.user.id },
-    },
-    attributes: ['id', 'name'],
+    }, */
+    attributes: ['id', 'name', 'photo'],
   });
   res.render('userList', { title: 'Users List', users });
 };
