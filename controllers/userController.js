@@ -37,7 +37,7 @@ exports.resizeImage = async (req, res, next) => {
   await photo
     .cover(500, 500)
     .quality(80)
-    .write(`./public/images/users/${req.body.photo}`);
+    .write(`./public/uploads/users/${req.body.photo}`);
   next();
 };
 
