@@ -3,6 +3,7 @@ const models = require('./models');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 require('./handlers/websocket')(io);
+const { sequelize } = require('./models');
 // Read dotfile
 require('dotenv').config();
 
@@ -12,7 +13,7 @@ const options = {
   force: false, // TRUE: drop existing tables if they exist
 };
 
-models.sequelize
+sequelize
   .sync(options)
   .then(() => {
     server.listen(port);
@@ -21,4 +22,10 @@ models.sequelize
 
 server.on('listening', () => {
   console.log(`Express is running on port ${port}`);
+});
+
+// Crash the server on unhandledRejection
+// instead of failing silently
+process.on('unhandledRejection', err => {
+  throw err;
 });
