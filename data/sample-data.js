@@ -34,7 +34,9 @@ async function createSampleData() {
 }
 
 async function deleteData() {
-  // bulk delete
+  console.log('Removing all the data!');
+  await User.destroy({ where: {} });
+  console.log('Bye bye');
   process.exit();
 }
 
@@ -42,7 +44,7 @@ sequelize
   .sync()
   .then(async () => {
     if (process.argv.includes('--delete')) {
-      deleteData();
+      await deleteData();
     } else {
       await createSampleData();
     }
