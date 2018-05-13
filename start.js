@@ -1,4 +1,4 @@
-const models = require('./models');
+const { sequelize } = require('./models');
 // Read dotfile
 require('dotenv').config();
 
@@ -12,7 +12,7 @@ const options = {
   force: false, // TRUE: drop existing tables if they exist
 };
 
-models.sequelize
+sequelize
   .sync(options)
   .then(() => {
     app.listen(app.get('port'), () => {
