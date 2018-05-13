@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./public/scss/main.scss"],"names":[],"mappings":"AAAA;AACA,wBAAwB;AACxB;AACA,eAAe","file":"style.css","sourcesContent":["* {\n  background-color: red; }\n  * ::selection {\n    color: red; }\n"],"sourceRoot":""}
