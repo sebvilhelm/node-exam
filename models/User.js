@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             msg: 'Name cannot be empty',
           },
         },
-        // Set names to uppercase
+        // TODO: Set names to uppercase
       },
       email: {
         type: DataTypes.STRING,
@@ -68,6 +68,9 @@ module.exports = (sequelize, DataTypes) => {
             msg: 'Password cannot be empty',
           },
         },
+      },
+      photo: {
+        type: DataTypes.STRING,
       },
     },
     schemaOptions

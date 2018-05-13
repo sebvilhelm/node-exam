@@ -1,5 +1,20 @@
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
 const { User } = require('../models');
 const mail = require('../handlers/mail');
+
+const multerOptions = {
+  storage: multer.memoryStorage(),
+  fileFilter(req, file, next) {
+    const isPhoto = file.mimetype.startsWith('image/');
+    if (isPhoto) {
+      next(null, true);
+    } else {
+      next({ message: "filetype isn't allowed" }, false);
+    }
+  },
+};
 
 exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register' });
@@ -9,8 +24,24 @@ exports.loginForm = (req, res) => {
   res.render('login', { title: 'Login' });
 };
 
+exports.uploadImage = multer(multerOptions).single('photo');
+
+exports.resizeImage = async (req, res, next) => {
+  if (!req.file) {
+    next();
+    return;
+  }
+  const extension = req.file.mimetype.split('/')[1];
+  req.body.photo = `${uuid.v4()}.${extension}`;
+  const photo = await jimp.read(req.file.buffer);
+  await photo
+    .cover(500, 500)
+    .quality(80)
+    .write(`./public/images/users/${req.body.photo}`);
+  next();
+};
+
 exports.validateUser = async (req, res, next) => {
-  // Move all the validation out of the model and into here
   req.sanitizeBody('name');
   req.checkBody('name', 'You must supply your full name').notEmpty();
   req.checkBody('email', 'You must supply a valid email').isEmail();
