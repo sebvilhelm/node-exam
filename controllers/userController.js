@@ -1,4 +1,5 @@
 const { User, Sequelize } = require('../models');
+const mail = require('../handlers/mail');
 
 const $ = Sequelize.Op;
 
@@ -38,6 +39,7 @@ exports.validateUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
   const user = new User(req.body);
   await User.register(user, req.body.password);
+  await mail.send({ user });
   next();
 };
 
@@ -49,4 +51,9 @@ exports.userList = async (req, res) => {
     attributes: ['id', 'name'],
   });
   res.render('userList', { title: 'Users List', users });
+};
+
+exports.sendMail = async (req, res) => {
+  await mail.send();
+  res.redirect('/');
 };

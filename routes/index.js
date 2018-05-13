@@ -28,4 +28,6 @@ router.post('/chat/:id', chatController.addMessage);
 
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
+router.get('/mail', catchErrors(userController.sendMail));
+
 module.exports = router;
