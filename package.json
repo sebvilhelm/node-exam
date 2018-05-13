@@ -18,6 +18,7 @@
   "author": "Sebastian Nielsen",
   "license": "ISC",
   "scripts": {
+    "build": "webpack -p",
     "start": "node start.js",
     "dev": "concurrently --names \"💻,📦\" --prefix name \"npm run watch\" \"npm run assets\" ",
     "watch": "nodemon start.js --ignore public/",
@@ -42,9 +43,7 @@
     "pug": "^2.0.3",
     "sequelize": "^4.37.6",
     "socket.io": "^2.1.0",
-    "uuid": "^3.2.1"
-  },
-  "devDependencies": {
+    "uuid": "^3.2.1",
     "autoprefixer": "^8.4.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
@@ -53,12 +52,14 @@
     "css-loader": "^0.28.11",
     "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.9.0",
-    "nodemon": "^1.17.3",
     "optimize-css-assets-webpack-plugin": "^4.0.0",
     "postcss-loader": "^2.1.4",
     "sass-loader": "^7.0.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",
     "webpack-cli": "^2.0.15"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
   }
 }
