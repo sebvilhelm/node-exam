@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
             msg: 'Name cannot be empty',
           },
         },
-        // TODO: Set names to uppercase
+        // TODO: Set names to capitalized
       },
       email: {
         type: DataTypes.STRING,

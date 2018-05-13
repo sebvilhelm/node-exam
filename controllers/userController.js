@@ -76,3 +76,10 @@ exports.sendMail = async (req, res) => {
   await mail.send();
   res.redirect('/');
 };
+
+exports.apiShowUsers = async (req, res) => {
+  const users = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  res.json(users);
+};

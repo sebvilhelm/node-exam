@@ -24,4 +24,6 @@ router.get('/logout', authController.logout);
 
 router.get('/mail', catchErrors(userController.sendMail));
 
+router.get('/api/users', catchErrors(userController.apiShowUsers));
+
 module.exports = router;

@@ -22,6 +22,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   },
 });
 
+sequelize.Promise = global.Promise;
+
 // Import models
 const models = {
   User: sequelize.import('./User'),
