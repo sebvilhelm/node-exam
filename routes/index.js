@@ -9,10 +9,17 @@ const router = express.Router();
 router.get('/', (req, res) => res.render('index', { title: 'Home' }));
 
 router.get('/register', userController.registerForm);
-router.post('/register', userController.validateUser, catchErrors(userController.registerUser), authController.login);
+router.post(
+  '/register',
+  userController.uploadImage,
+  userController.validateUser,
+  catchErrors(userController.resizeImage),
+  // Check if the user already exists in the database
+  catchErrors(userController.registerUser),
+  authController.login
+);
 
 router.get('/login', userController.loginForm);
-
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
@@ -29,5 +36,7 @@ router.post('/chat/:id', chatController.addMessage);
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
 router.get('/mail', catchErrors(userController.sendMail));
+
+router.get('/api/users', catchErrors(userController.apiShowUsers));
 
 module.exports = router;

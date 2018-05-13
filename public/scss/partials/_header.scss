@@ -24,10 +24,21 @@
     &--active {
       color: tomato;
     }
-
     &:focus {
       outline: 0;
       background: rgba(#fff,0.2);
     }
+
+    &--image {
+      display: flex;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
+}
+
+.avatar {
+  height: 50px;
+  align-self: center;
+  border-radius: 50%;
 }

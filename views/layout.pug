@@ -17,6 +17,9 @@ html(lang="en")
               if user
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/users') ? 'nav__link--active' : '') href="/users") Users
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/logout') ? 'nav__link--active' : '') href="/logout") Logout
+                li.nav__item: span.nav__link.nav__link--image(class=(currentPath.startsWith('/profile') ? 'nav__link--image--active' : '') href="/profile")
+                  img.avatar(src=`/uploads/users/${user.photo}` alt=`${user.name}'s profile image`)
+                  
               else
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/login') ? 'nav__link--active' : '') href="/login") Login
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/register') ? 'nav__link--active' : '') href="/register") Register
