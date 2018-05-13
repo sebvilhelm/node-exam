@@ -20,15 +20,32 @@ const createUserArray = length =>
     photo: faker.image.avatar(),
   }));
 
+async function createSampleData() {
+  const anyUser = await User.find();
+  if (anyUser) {
+    throw new Error("Don't run this script, if you have users in your database!");
+  }
+  console.log("Connected to database. Let's generate some users");
+  const users = createUserArray(10);
+  console.log('Users generated, adding to the database...');
+  await User.bulkCreate(users);
+  console.log('Sample data added to database!');
+  process.exit();
+}
+
+async function deleteData() {
+  // bulk delete
+  process.exit();
+}
+
 sequelize
   .sync()
   .then(async () => {
-    console.log("Connected to database. Let's generate some users");
-    const users = createUserArray(10);
-    console.log('Users generated, adding to the database...');
-    await User.bulkCreate(users);
-    console.log('Sample data added to database!');
-    process.exit();
+    if (process.argv.includes('--delete')) {
+      deleteData();
+    } else {
+      await createSampleData();
+    }
   })
   .catch(err => {
     console.log('Something went wrong');
