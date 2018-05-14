@@ -67,12 +67,11 @@ exports.getUser = async (socket, next) => {
     next(true);
     return;
   }
-
-  const { name } = await User.findById(id);
+  const { name, photo } = await User.findById(id);
   socket.user = {
     id,
     name,
+    photo,
   };
-  console.log(socket.user);
   next();
 };
