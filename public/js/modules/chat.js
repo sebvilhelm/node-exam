@@ -5,14 +5,14 @@ export default function() {
   const chatWindow = document.querySelector('#chatWindow');
   if (!chatWindow) return;
 
-  const chat = io();
+  const socket = io();
 
   const room = document.querySelector('input[name="channelId"]').value;
   const messageForm = document.querySelector('#messageForm');
 
-  chat.emit('room', room);
+  socket.emit('room', room);
 
-  chat.on('message', ({ from, message }) => {
+  socket.on('message', ({ from, message }) => {
     console.log(from, message);
   });
 
@@ -22,13 +22,7 @@ export default function() {
     const message = messageInput.value;
 
     // TODO: Send message
-    chat.emit('message', { from: 'User', message });
-    /*  axios
-      .post(`/chat/${room}`, {
-        message,
-      })
-      .then(res => console.log(res))
-      .catch(err => console.error(err)); */
+    socket.emit('message', { from: 'User', message });
 
     messageInput.value = '';
   });
