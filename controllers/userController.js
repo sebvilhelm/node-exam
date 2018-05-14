@@ -69,7 +69,7 @@ exports.validateUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
   const user = new User(req.body);
   await User.register(user, req.body.password);
-  await mail.send({ user });
+  // await mail.send({ user });
   next();
 };
 
