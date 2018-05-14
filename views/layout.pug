@@ -18,7 +18,7 @@ html(lang="en")
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/users') ? 'nav__link--active' : '') href="/users") Users
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/logout') ? 'nav__link--active' : '') href="/logout") Logout
                 li.nav__item: span.nav__link.nav__link--image(class=(currentPath.startsWith('/profile') ? 'nav__link--image--active' : '') href="/profile")
-                  img.avatar(src=`/uploads/users/${user.photo}` alt=`${user.name}'s profile image`)
+                  img.avatar(src=user.photo alt=`${user.name}'s profile image`)
                   
               else
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/login') ? 'nav__link--active' : '') href="/login") Login
