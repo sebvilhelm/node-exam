@@ -1,11 +1,11 @@
 const app = require('./app');
-const models = require('./models');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-require('./handlers/websocket')(io);
 const { sequelize } = require('./models');
 // Read dotfile
 require('dotenv').config();
+
+require('./handlers/websocket')(io);
 
 const port = process.env.PORT || 3000;
 

@@ -3,11 +3,9 @@ extends layout
 block content
   .inner
     h1= title
-    #chatWindow
-      input(type="hidden" name="channelId" value=chat.id)
-      //- input(type="hidden" name="userId" value=user.id)
-      //- input(type="hidden" name="userName" value=user.name)
-      form#messageForm.form(action="POST")
-        label.label Your Message
-          input.input(name="message" autocomplete="off")
-        button.button(type="submit") Send
+    #chatWindow.chat__window
+    input(type="hidden" name="channelId" value=chat.id)
+    form#messageForm.form(action="POST")
+      label.label Your Message
+        input.input(name="message" autocomplete="off")
+      button.button(type="submit") Send

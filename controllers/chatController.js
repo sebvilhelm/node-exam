@@ -48,6 +48,31 @@ exports.showChannel = async (req, res) => {
   res.render('chat', { title: `Chat with ${name}`, chat });
 };
 
-exports.addMessage = (req, res) => {
-  res.json(req.body);
+const getUserId = socket => {
+  if (
+    socket &&
+    socket.handshake &&
+    socket.handshake.session &&
+    socket.handshake.session.passport &&
+    socket.handshake.session.passport.user
+  ) {
+    return socket.handshake.session.passport.user;
+  }
+  return undefined;
+};
+
+exports.getUser = async (socket, next) => {
+  const id = getUserId(socket);
+  if (!id) {
+    next(true);
+    return;
+  }
+
+  const { name } = await User.findById(id);
+  socket.user = {
+    id,
+    name,
+  };
+  console.log(socket.user);
+  next();
 };

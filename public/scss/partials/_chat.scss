@@ -1,0 +1,18 @@
+.chat__window {
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.chat__message {
+  padding: 1rem;
+  background-color: tomato;
+  margin: 1rem 0;
+
+  &--self {
+    background-color: mediumaquamarine;
+  }
+}
+
+.chat__name {
+  font-weight: bold;
+}
