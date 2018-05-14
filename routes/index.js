@@ -33,6 +33,8 @@ router.get('/chat/:id', authController.isLoggedIn, catchErrors(chatController.sh
 
 router.post('/chat/:id', chatController.addMessage);
 
+router.get('/chat', chatController.getGlobalChat);
+
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
 router.get('/mail', catchErrors(userController.sendMail));

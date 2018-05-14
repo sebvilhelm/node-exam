@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-import axios from 'axios';
+// import axios from 'axios';
 
 export default function() {
   const chatWindow = document.querySelector('#chatWindow');
@@ -21,13 +21,15 @@ export default function() {
     const messageInput = e.target.querySelector('[name="message"]');
     const message = messageInput.value;
 
-    axios
+    // TODO: Send message
+    chat.emit('message', { from: 'User', message });
+    /*  axios
       .post(`/chat/${room}`, {
         message,
       })
       .then(res => console.log(res))
-      .catch(err => console.error(err));
-    // TODO: Send message
+      .catch(err => console.error(err)); */
+
     messageInput.value = '';
   });
 }

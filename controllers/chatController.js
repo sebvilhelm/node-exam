@@ -2,6 +2,12 @@ const { Channel, User, Sequelize } = require('../models');
 
 const $ = Sequelize.Op;
 
+exports.getGlobalChat = (req, res) => {
+  // 1. get all messages
+  // 2. Render the template
+  res.render('chat', { title: 'Global Chat', chat: { id: 1 } });
+};
+
 exports.channelExists = async (req, res, next) => {
   // check if channel already exists
 
