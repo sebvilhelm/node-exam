@@ -57,7 +57,7 @@ exports.sendVerificationSMS = async (req, res, next) => {
     qs.stringify({
       mobile: req.body.phoneNumber,
       message: 'Your user has been created',
-      apiToken: '$2y$10$U2jnhjiDttXx1k8kdk7pz.q2fwcrTSYs5KfXOwGk9mUcoKE2BY0iC',
+      apiToken: process.env.SMSESIO_API_TOKEN,
     })
   );
 
