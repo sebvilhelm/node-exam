@@ -1,3 +1,5 @@
+const axios = require('axios');
+const qs = require('querystring');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -41,6 +43,28 @@ exports.resizeImage = async (req, res, next) => {
     .cover(500, 500)
     .quality(80)
     .write(`./public/uploads/users/${filename}`);
+  next();
+};
+
+exports.sendVerificationSMS = async (req, res, next) => {
+  if (!req.body.smsVerification || !req.body.phoneNumber) {
+    next();
+    return;
+  }
+
+  const { data } = await axios.post(
+    'http://smses.io/api-send-sms.php',
+    qs.stringify({
+      mobile: req.body.phoneNumber,
+      message: 'Your user has been created',
+      apiToken: '$2y$10$U2jnhjiDttXx1k8kdk7pz.q2fwcrTSYs5KfXOwGk9mUcoKE2BY0iC',
+    })
+  );
+
+  if (data.status === 'error') {
+    req.flash('error', "We couldn't send the verification sms");
+  }
+
   next();
 };
 

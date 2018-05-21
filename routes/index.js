@@ -16,6 +16,7 @@ router.post(
   catchErrors(userController.resizeImage),
   // Check if the user already exists in the database
   catchErrors(userController.registerUser),
+  catchErrors(userController.sendVerificationSMS),
   authController.login
 );
 
