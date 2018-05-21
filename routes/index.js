@@ -13,10 +13,10 @@ router.post(
   '/register',
   userController.uploadImage,
   userController.validateUser,
+  // TODO: Check if the user already exists in the database
   catchErrors(userController.resizeImage),
-  // Check if the user already exists in the database
   catchErrors(userController.registerUser),
-  catchErrors(userController.sendVerificationSMS),
+  // catchErrors(userController.sendVerificationSMS), // TODO: uncomment
   authController.login
 );
 
