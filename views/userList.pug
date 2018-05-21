@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .inner
+    h1 Users
+    if users.length > 0
+      ul.user-list
+        each user in users
+          li.user-list__item
+            .user-card
+              h2.user-card__title= user.name
+              img.user-card__avatar(src=user.photo alt=`${user.name} portrait`)
+              form(action="/chat" method="post")
+                input(type="hidden", name="userId" value=user.id)
+                button.button(type="submit") Start chat

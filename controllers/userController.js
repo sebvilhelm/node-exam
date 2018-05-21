@@ -1,8 +1,10 @@
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
-const { User } = require('../models');
+const { User, Sequelize } = require('../models');
 const mail = require('../handlers/mail');
+
+const $ = Sequelize.Op;
 
 const multerOptions = {
   storage: multer.memoryStorage(),
@@ -71,6 +73,16 @@ exports.registerUser = async (req, res, next) => {
   await User.register(user, req.body.password);
   // await mail.send({ user });
   next();
+};
+
+exports.userList = async (req, res) => {
+  const users = await User.findAll({
+    /* where: {
+      id: { [$.ne]: req.user.id },
+    }, */
+    attributes: ['id', 'name', 'photo'],
+  });
+  res.render('userList', { title: 'Users List', users });
 };
 
 exports.sendMail = async (req, res) => {

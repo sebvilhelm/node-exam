@@ -19,6 +19,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   // Transform from camelCase to snake_case
   define: {
     underscored: true,
+    underscoredAll: true,
   },
 });
 
@@ -27,6 +28,7 @@ sequelize.Promise = global.Promise;
 // Import models
 const models = {
   User: sequelize.import('./User'),
+  Channel: sequelize.import('./Channel'),
 };
 
 Object.keys(models).forEach(modelName => {
