@@ -34,7 +34,6 @@
     "babel-preset-env": "^1.6.1",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
-    "concurrently": "^3.5.1",
     "connect-flash": "^0.1.1",
     "css-loader": "^0.28.11",
     "dotenv": "^5.0.1",
@@ -66,6 +65,7 @@
     "webpack-cli": "^2.0.15"
   },
   "devDependencies": {
+    "concurrently": "^3.5.1",
     "nodemon": "^1.17.3"
   }
 }
