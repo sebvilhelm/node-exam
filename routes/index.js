@@ -16,9 +16,11 @@ router.post(
   // TODO: Check if the user already exists in the database
   catchErrors(userController.resizeImage),
   catchErrors(userController.registerUser),
-  // catchErrors(userController.sendVerificationSMS), // TODO: uncomment
-  authController.login
+  catchErrors(userController.sendVerificationSMS),
+  userController.userCreated
 );
+
+router.get('user-confirmation', userController.showConfirmation);
 
 router.get('/auth/google', authController.googleAuth);
 router.get('/auth/google/callback', authController.googleAuthCallback);
@@ -38,8 +40,6 @@ router.get('/chat/:id', authController.isLoggedIn, catchErrors(chatController.sh
 router.get('/chat', authController.isLoggedIn, chatController.getGlobalChat);
 
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
-
-router.get('/mail', catchErrors(userController.sendMail));
 
 router.get('/api/users', catchErrors(userController.apiShowUsers));
 

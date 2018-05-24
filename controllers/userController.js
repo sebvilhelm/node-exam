@@ -92,26 +92,41 @@ exports.validateUser = async (req, res, next) => {
   next();
 };
 
+exports.CheckIfUserExists = async (req, res, next) => {
+  const user = User.findByEmail(req.body.email);
+
+  if (!user) {
+    next();
+    return;
+  }
+
+  await mail.send({ user, subject: 'Someone tried to use your email address...', filename: 'warning' });
+  res.redirect('/user-confirmation');
+};
+
 exports.registerUser = async (req, res, next) => {
   const user = new User(req.body);
   await User.register(user, req.body.password);
-  // await mail.send({ user });
+  await mail.send({ user, subject: 'Yay!!', filename: 'confirmation' });
   next();
 };
 
 exports.userList = async (req, res) => {
   const users = await User.findAll({
-    /* where: {
+    where: {
       id: { [$.ne]: req.user.id },
-    }, */
+    },
     attributes: ['id', 'name', 'photo'],
   });
   res.render('userList', { title: 'Users List', users });
 };
 
-exports.sendMail = async (req, res) => {
-  await mail.send();
-  res.redirect('/');
+exports.showConfirmation = (req, res) => {
+  res.render('userCreated', { title: 'Check your email!' });
+};
+
+exports.userCreated = (req, res) => {
+  res.redirect('/user-confirmation');
 };
 
 exports.apiShowUsers = async (req, res) => {

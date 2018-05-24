@@ -11,16 +11,15 @@ const transport = nodemailer.createTransport({
   },
 });
 
-const generateHtml = (filename, options = {}) =>
-  pug.renderFile(`${__dirname}/../views/email/email-layout.pug`, options);
+const generateHtml = (filename, options = {}) => pug.renderFile(`${__dirname}/../views/email/${filename}.pug`, options);
 
 exports.send = options => {
-  const html = generateHtml(options);
+  const html = generateHtml(options.filename, options);
   const text = htmlToText.fromString(html);
   const mailOptions = {
     from: 'Node Exam <noreply@example.com>',
     to: options.user.email,
-    subject: 'Your account has been created',
+    subject: options.subject,
     text,
     html,
   };
