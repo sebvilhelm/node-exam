@@ -15,17 +15,29 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: `${process.env.URL}/auth/google/callback`,
     },
-    (accessToken, refreshToken, profile, done) => {
-      const {
-        name,
-        emails: [{ value: email }],
-      } = profile;
-      const user = new User({
-        name: `${name.givenName} ${name.familyName}`,
-        email,
-      });
-      console.log(user);
-      done(null, {});
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        console.log(profile);
+        const {
+          name: { familyName, givenName },
+          emails: [{ value: email }],
+          id: googleId,
+          photos: [{ value: photo }],
+        } = profile;
+
+        const existingUser = await User.findByEmail(email);
+
+        if (existingUser) {
+          done(null, existingUser);
+          return;
+        }
+
+        const user = await User.create({ name: `${givenName} ${familyName}`, email, photo, googleId, type: 'google' });
+
+        done(null, user);
+      } catch (e) {
+        done(e, {});
+      }
     }
   )
 );

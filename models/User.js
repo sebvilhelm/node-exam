@@ -49,27 +49,21 @@ module.exports = (sequelize, DataTypes) => {
       phoneNumber: {
         type: DataTypes.STRING,
         unique: true,
-        allowNull: false,
-        validate: {
-          isNumeric: {
-            msg: 'Phone numbers can only contain numbers',
-          },
-          len: {
-            args: [8, 8],
-            msg: 'Please enter a valid, danish phone number',
-          },
-        },
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: 'Password cannot be empty',
-          },
-        },
+        allowNull: true,
       },
       photo: {
+        type: DataTypes.STRING,
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'local',
+      },
+      googleId: {
         type: DataTypes.STRING,
       },
     },
@@ -80,10 +74,18 @@ module.exports = (sequelize, DataTypes) => {
     user.password = await bcrypt.hash(user.password, 12);
   };
 
-  User.beforeCreate(User.hashPassword);
-  User.beforeUpdate(User.hashPassword);
+  User.beforeCreate(user => {
+    if (user.password) {
+      User.hashPassword(user);
+    }
+  });
+  User.beforeUpdate(user => {
+    if (user.password) {
+      User.hashPassword(user);
+    }
+  });
 
-  User.findUserByEmail = function(email) {
+  User.findByEmail = function(email) {
     return this.findOne({ where: { email } });
   };
 
@@ -105,7 +107,7 @@ module.exports = (sequelize, DataTypes) => {
   User.authenticate = function() {
     return async (email, password, done) => {
       try {
-        const user = await this.findUserByEmail(email);
+        const user = await this.findByEmail(email);
 
         if (!user) {
           done(null, false);
