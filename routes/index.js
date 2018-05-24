@@ -13,14 +13,14 @@ router.post(
   '/register',
   userController.uploadImage,
   userController.validateUser,
-  // TODO: Check if the user already exists in the database
+  catchErrors(userController.CheckIfUserExists),
   catchErrors(userController.resizeImage),
   catchErrors(userController.registerUser),
   catchErrors(userController.sendVerificationSMS),
   userController.userCreated
 );
 
-router.get('user-confirmation', userController.showConfirmation);
+router.get('/user-confirmation', userController.showConfirmation);
 
 router.get('/auth/google', authController.googleAuth);
 router.get('/auth/google/callback', authController.googleAuthCallback);
