@@ -1,8 +1,12 @@
+const axios = require('axios');
+const qs = require('querystring');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
-const { User } = require('../models');
+const { User, Sequelize } = require('../models');
 const mail = require('../handlers/mail');
+
+const $ = Sequelize.Op;
 
 const multerOptions = {
   storage: multer.memoryStorage(),
@@ -32,12 +36,35 @@ exports.resizeImage = async (req, res, next) => {
     return;
   }
   const extension = req.file.mimetype.split('/')[1];
-  req.body.photo = `${uuid.v4()}.${extension}`;
+  const filename = `${uuid.v4()}.${extension}`;
+  req.body.photo = `${process.env.URL}/uploads/users/${filename}`;
   const photo = await jimp.read(req.file.buffer);
   await photo
     .cover(500, 500)
     .quality(80)
-    .write(`./public/uploads/users/${req.body.photo}`);
+    .write(`./public/uploads/users/${filename}`);
+  next();
+};
+
+exports.sendVerificationSMS = async (req, res, next) => {
+  if (!req.body.smsVerification || !req.body.phoneNumber) {
+    next();
+    return;
+  }
+
+  const { data } = await axios.post(
+    'http://smses.io/api-send-sms.php',
+    qs.stringify({
+      mobile: req.body.phoneNumber,
+      message: 'Your user has been created',
+      apiToken: process.env.SMSESIO_API_TOKEN,
+    })
+  );
+
+  if (data.status === 'error') {
+    req.flash('error', "We couldn't send the verification sms");
+  }
+
   next();
 };
 
@@ -68,8 +95,18 @@ exports.validateUser = async (req, res, next) => {
 exports.registerUser = async (req, res, next) => {
   const user = new User(req.body);
   await User.register(user, req.body.password);
-  await mail.send({ user });
+  // await mail.send({ user });
   next();
+};
+
+exports.userList = async (req, res) => {
+  const users = await User.findAll({
+    /* where: {
+      id: { [$.ne]: req.user.id },
+    }, */
+    attributes: ['id', 'name', 'photo'],
+  });
+  res.render('userList', { title: 'Users List', users });
 };
 
 exports.sendMail = async (req, res) => {

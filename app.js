@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const passport = require('passport');
 const routes = require('./routes');
 const helpers = require('./helpers');
+const session = require('./handlers/session');
 require('./handlers/passport');
 
 const errorHandlers = require('./handlers/errorHandlers');
@@ -25,13 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(expressValidator());
 
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+app.use(session);
 
 app.use(passport.initialize());
 app.use(passport.session());
