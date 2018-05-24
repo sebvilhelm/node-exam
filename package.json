@@ -6,7 +6,10 @@
     "node": ">=8.11.1"
   },
   "now": {
-    "dotenv": ".env.now"
+    "dotenv": ".env.now",
+    "engines": {
+      "node": "8.x.x"
+    }
   },
   "browserslist": ">0.25%, not ie 11, not op_mini all",
   "description": "Full-stack Express application using PostgreSQL",
