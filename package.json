@@ -1,9 +1,12 @@
 {
   "name": "node-exam",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "private": true,
   "engines": {
     "node": ">=8.11.1"
+  },
+  "now": {
+    "dotenv": ".env.now"
   },
   "browserslist": ">0.25%, not ie 11, not op_mini all",
   "description": "Full-stack Express application using PostgreSQL",
@@ -11,16 +14,14 @@
     "type": "git",
     "url": "https://github.com:VilhelmNielsen/node-exam"
   },
-  "keywords": [
-    "express",
-    "nodejs"
-  ],
+  "keywords": ["express", "nodejs"],
   "author": "Sebastian Nielsen",
   "license": "ISC",
   "scripts": {
     "build": "webpack -p",
     "start": "node start.js",
-    "dev": "concurrently --names \"💻,📦\" --prefix name \"npm run watch\" \"npm run assets\" ",
+    "dev":
+      "concurrently --names \"💻,📦\" --prefix name \"npm run watch\" \"npm run assets\" ",
     "watch": "nodemon start.js --ignore public/",
     "assets": "webpack -w --display-max-modules 0",
     "loadsampledata": "node data/sample-data.js",
