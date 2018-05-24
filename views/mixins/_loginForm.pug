@@ -6,3 +6,6 @@ mixin loginForm(values = {})
     label.label Password:
       input.input(type="password" name="password")
     button.button(type="submit") Log In →
+    a.button.button--google(href="/auth/google")
+      span.icon.icon--google
+      span Sign in with Google
