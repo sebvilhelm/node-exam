@@ -74,9 +74,9 @@ module.exports = (sequelize, DataTypes) => {
     user.password = await bcrypt.hash(user.password, 12);
   };
 
-  User.beforeCreate(user => {
+  User.beforeCreate(async user => {
     if (user.password) {
-      User.hashPassword(user);
+      await User.hashPassword(user);
     }
   });
   User.beforeUpdate(user => {
@@ -92,9 +92,6 @@ module.exports = (sequelize, DataTypes) => {
   User.register = function(user) {
     return new Promise(async (resolve, reject) => {
       try {
-        // TODO: Handle if email is already in the system
-        // but maybe not here? Probably controller
-
         // user has to already be instantiated
         const createdUser = await user.save();
         resolve(createdUser);
