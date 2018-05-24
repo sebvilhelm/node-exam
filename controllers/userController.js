@@ -37,7 +37,7 @@ exports.resizeImage = async (req, res, next) => {
   }
   const extension = req.file.mimetype.split('/')[1];
   const filename = `${uuid.v4()}.${extension}`;
-  req.body.photo = `${process.env.URL}/uploads/users/${filename}`;
+  req.body.photo = filename;
   const photo = await jimp.read(req.file.buffer);
   await photo
     .cover(500, 500)

@@ -17,7 +17,6 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log(profile);
         const {
           name: { familyName, givenName },
           emails: [{ value: email }],
