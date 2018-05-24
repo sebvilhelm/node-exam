@@ -93,7 +93,7 @@ exports.validateUser = async (req, res, next) => {
 };
 
 exports.CheckIfUserExists = async (req, res, next) => {
-  const user = User.findByEmail(req.body.email);
+  const user = await User.findByEmail(req.body.email);
 
   if (!user) {
     next();
