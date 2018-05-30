@@ -3,8 +3,8 @@
  * Each message container:
  *  id (primary)
  *  content
- *  author (foreign key)
- *  chatroom (foreign key)
+ *  authorId (foreign key)
+ *  chatroomId (foreign key)
  */
 
 /**
