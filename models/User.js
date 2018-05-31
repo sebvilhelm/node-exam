@@ -79,9 +79,9 @@ module.exports = (sequelize, DataTypes) => {
       await User.hashPassword(user);
     }
   });
-  User.beforeUpdate(user => {
+  User.beforeUpdate(async user => {
     if (user.password) {
-      User.hashPassword(user);
+      await User.hashPassword(user);
     }
   });
 
