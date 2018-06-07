@@ -29,6 +29,7 @@ sequelize.Promise = global.Promise;
 const models = {
   User: sequelize.import('./User'),
   Channel: sequelize.import('./Channel'),
+  Message: sequelize.import('./Message'),
 };
 
 Object.keys(models).forEach(modelName => {

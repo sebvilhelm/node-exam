@@ -1,4 +1,4 @@
-/* 
+/*
 Chat room model for chat rooms.
 Each chat will contain
   id (primary key)
@@ -30,6 +30,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'channel_id',
       targetKey: 'id',
     });
+
+    Channel.hasMany(models.Message);
   };
 
   return Channel;
