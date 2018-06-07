@@ -9,7 +9,7 @@ block content
         .chat__message(class=(isCurrentUser ? 'chat__message--self': ''))
           img.chat__avatar(src=(message.user.photo.startsWith('http') ? message.user.photo : `/uploads/users/${message.user.photo}`))
           span.chat__name(class=(isCurrentUser ? 'chat__name--self': ''))= isCurrentUser ? 'Me': message.user.name
-          p= message.content
+          p.chat__content= message.content
     input(type="hidden" name="channelId" value=chat.id)
     form#messageForm.form(action="POST")
       label.label Your Message
