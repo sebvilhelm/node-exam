@@ -1,5 +1,4 @@
 import io from 'socket.io-client';
-// import axios from 'axios';
 
 function appendMessageToDOM({ name = '', message = '', photo, node, isMe = false }) {
   const messageNode = `
