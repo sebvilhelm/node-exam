@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 function appendMessageToDOM({ name = '', message = '', photo, node, isMe = false }) {
   const messageNode = `
     <div class="chat__message ${isMe && 'chat__message--self'}">
-    <img class="chat__avatar" src="${photo}" aria-hidden="true" /> <span class="chat__name ${isMe &&
+      <img class="chat__avatar" src="${photo}" aria-hidden="true" /> <span class="chat__name ${isMe &&
     'chat__name--self'}">${name}</span>
       <p>${message}</p>
     </div>

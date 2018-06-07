@@ -12,8 +12,12 @@ module.exports = io => {
     socket.on('room', room => {
       socket.join(room);
 
-      socket.on('message', message => {
-        socket.broadcast.to(room).emit('message', { from: socket.user, message });
+      socket.on('message', content => {
+        const { id: userId } = socket.user;
+        chatController
+          .addMessage({ content, userId, channelId: room })
+          .then(() => socket.broadcast.to(room).emit('message', { from: socket.user, content }))
+          .catch(error => console.log(error));
       });
     });
   });

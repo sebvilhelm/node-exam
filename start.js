@@ -10,11 +10,13 @@ require('./handlers/websocket')(io);
 const port = process.env.PORT || 3000;
 
 const options = {
-  force: false, // TRUE: drop existing tables if they exist
+  force: true, // TRUE: drop existing tables if they exist
 };
 
 sequelize
   .sync(options)
+  // Create global chat room, if it doesn't exist
+  .then(() => sequelize.models.channel.findOrCreate({ where: { id: 1 } }))
   .then(() => {
     server.listen(port);
   })

@@ -1,11 +1,13 @@
-const { Channel, User, Sequelize } = require('../models');
+const { Channel, User, Message, Sequelize } = require('../models');
 
 const $ = Sequelize.Op;
 
-exports.getGlobalChat = (req, res) => {
+exports.getGlobalChat = async (req, res) => {
   // 1. get all messages
+  const channel = await Channel.findOne({ where: { id: 1 } });
+  const messages = await channel.getMessages({ include: [User] });
   // 2. Render the template
-  res.render('chat', { title: 'Global Chat', chat: { id: 1 } });
+  res.render('chat', { title: 'Global Chat', chat: { id: channel.id, messages } });
 };
 
 exports.channelExists = async (req, res, next) => {
@@ -74,4 +76,10 @@ exports.getUser = async (socket, next) => {
     photo,
   };
   next();
+};
+
+exports.addMessage = async ({ userId, channelId, content }) => {
+  const message = new Message({ content });
+  await Promise.all([message.setUser(userId, { save: false }), message.setChannel(channelId, { save: false })]);
+  return message.save();
 };

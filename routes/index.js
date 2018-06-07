@@ -37,7 +37,7 @@ router.post(
 );
 router.get('/chat/:id', authController.isLoggedIn, catchErrors(chatController.showChannel));
 
-router.get('/chat', authController.isLoggedIn, chatController.getGlobalChat);
+router.get('/chat', authController.isLoggedIn, catchErrors(chatController.getGlobalChat));
 
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
