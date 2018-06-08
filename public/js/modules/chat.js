@@ -7,7 +7,7 @@ function appendMessageToDOM({ name = '', message = { content: '', created_at: ''
   const messageNode = `
     <div class="chat__message ${isMe && 'chat__message--self'}">
       <img class="chat__avatar" src="${profileImg}" />
-      <p>
+      <p class="chat__meta">
         <span class="chat__name ${isMe && 'chat__name--self'}">${name}</span>
         <span class="chat__date-time">${date}</span>
       </p>
