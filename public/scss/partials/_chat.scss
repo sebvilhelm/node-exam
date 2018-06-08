@@ -15,7 +15,12 @@
   }
 }
 
+.chat__meta {
+  margin: 0;
+}
+
 .chat__name {
+  display: block;
   align-self: center;
   font-weight: bold;
   color: $red;
@@ -23,6 +28,11 @@
   &--self {
     color: $green;
   }
+}
+
+.chat__date-time {
+  display: block;
+  color: #a0a0a0;
 }
 
 .chat__avatar {

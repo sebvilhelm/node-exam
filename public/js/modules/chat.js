@@ -1,12 +1,17 @@
 import io from 'socket.io-client';
 import scrollToNodeBottom from './scrollToBottom';
 
-function appendMessageToDOM({ name = '', message = '', photo, node, isMe = false }) {
+function appendMessageToDOM({ name = '', message = { content: '', created_at: '' }, photo, node, isMe = false }) {
+  const date = message.created_at;
+  const profileImg = photo || 'images/profile-placeholder.png';
   const messageNode = `
     <div class="chat__message ${isMe && 'chat__message--self'}">
-      <img class="chat__avatar" src="${photo}" aria-hidden="true" /> <span class="chat__name ${isMe &&
-    'chat__name--self'}">${name}</span>
-      <p class="chat__content">${message}</p>
+      <img class="chat__avatar" src="${profileImg}" />
+      <p>
+        <span class="chat__name ${isMe && 'chat__name--self'}">${name}</span>
+        <span class="chat__date-time">${date}</span>
+      </p>
+      <p class="chat__content">${message.content}</p>
     </div>
   `;
 
@@ -35,7 +40,10 @@ export default function() {
   messageForm.addEventListener('submit', e => {
     e.preventDefault();
     const messageInput = e.target.querySelector('[name="message"]');
-    const message = messageInput.value;
+    const message = {
+      content: messageInput.value,
+      created_at: new Date().toString(),
+    };
 
     appendMessageToDOM({
       isMe: true,
@@ -44,7 +52,7 @@ export default function() {
       photo: photoSelf,
       node: chatWindow,
     });
-    socket.emit('message', message);
+    socket.emit('message', message.content);
 
     messageInput.value = '';
   });
