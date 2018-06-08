@@ -1,4 +1,5 @@
 import io from 'socket.io-client';
+import scrollToNodeBottom from './scrollToBottom';
 
 function appendMessageToDOM({ name = '', message = '', photo, node, isMe = false }) {
   const messageNode = `
@@ -10,11 +11,15 @@ function appendMessageToDOM({ name = '', message = '', photo, node, isMe = false
   `;
 
   node.insertAdjacentHTML('beforeend', messageNode);
+
+  scrollToNodeBottom(node);
 }
 
 export default function() {
   const chatWindow = document.querySelector('#chatWindow');
   if (!chatWindow) return;
+
+  scrollToNodeBottom(chatWindow);
 
   const socket = io();
 
@@ -32,7 +37,13 @@ export default function() {
     const messageInput = e.target.querySelector('[name="message"]');
     const message = messageInput.value;
 
-    appendMessageToDOM({ isMe: true, name: 'Me', message, photo: photoSelf, node: chatWindow });
+    appendMessageToDOM({
+      isMe: true,
+      name: 'Me',
+      message,
+      photo: photoSelf,
+      node: chatWindow,
+    });
     socket.emit('message', message);
 
     messageInput.value = '';
