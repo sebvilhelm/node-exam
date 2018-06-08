@@ -21,7 +21,7 @@ html(lang="en")
                 li.nav__item: span.nav__link.nav__link--image(class=(currentPath.startsWith('/profile') ? 'nav__link--image--active' : '') href="/profile")
                   if user.photo
                     - const photoSrc = user.photo.startsWith('http') ? user.photo : `/uploads/users/${user.photo}`
-                    img.avatar(src=photoSrc alt=`${user.name}'s profile image`)
+                    img.avatar(src=user.photo alt=`${user.name}'s profile image`)
                   else
                     img.avatar(src="images/profile-placeholder.png" alt="Placeholder user image")
 

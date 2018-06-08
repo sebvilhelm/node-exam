@@ -8,7 +8,7 @@ block content
         -const isCurrentUser = user.id === message.user.id;
         .chat__message(class=(isCurrentUser ? 'chat__message--self': ''))
           if message.user.photo
-            img.chat__avatar(src=(message.user.photo.startsWith('http') ? message.user.photo : `/uploads/users/${message.user.photo}`))
+            img.chat__avatar(src=(message.user.photo))
           else
             img.chat__avatar(src="images/profile-placeholder.png" alt="Placeholder user image")
           p.chat__meta
