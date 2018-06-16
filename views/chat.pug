@@ -14,7 +14,8 @@ block content
               img.chat__avatar(src="/images/profile-placeholder.png" alt="Placeholder user image")
             p.chat__meta
               span.chat__name(class=(isCurrentUser ? 'chat__name--self': ''))= isCurrentUser ? 'Me': message.user.name
-              span.chat__date-time= message.created_at
+              - const date = h.dateFns.isToday(message.created_at) ? `Today at ${h.dateFns.format(message.created_at, 'HH:mm')}` : h.dateFns.distanceInWordsToNow(message.created_at);
+              span.chat__date-time= date
             p.chat__content= message.content
     input(type="hidden" name="channelId" value=chat.id)
     form#messageForm.form(action="POST")

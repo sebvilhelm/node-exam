@@ -1,9 +1,10 @@
 import io from 'socket.io-client';
+import format from 'date-fns/format';
 import scrollToNodeBottom from './scrollToBottom';
 
 function appendMessageToDOM({ name = '', message = { content: '', created_at: '' }, photo, node, isMe = false }) {
-  const date = message.created_at;
-  const profileImg = photo || 'images/profile-placeholder.png';
+  const date = format(message.created_at, 'HH:mm');
+  const profileImg = photo || '/images/profile-placeholder.png';
   const messageNode = `
     <div class="chat__message ${isMe && 'chat__message--self'}">
       <img class="chat__avatar" src="${profileImg}" />
