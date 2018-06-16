@@ -10,6 +10,8 @@ block content
             .chat-card
               h2.chat-card__title Chat with:
               if channel.users
-                each user in channel.users
-                  img(src=h.avatar(user.photo) alt=`${user.name}'s photo`)
+                ul.chat-list__user-list
+                  each user in channel.users
+                    li.chat__user
+                      img.chat-list__avatar(src=h.avatar(user.photo) alt=`${user.name}'s photo`)
               a.button(href=`/chat/${channel.id}`) Go to chat
