@@ -41,6 +41,8 @@ router.get('/chat', authController.isLoggedIn, catchErrors(chatController.getGlo
 
 router.get('/users', authController.isLoggedIn, catchErrors(userController.userList));
 
+router.get('/my-chats', authController.isLoggedIn, catchErrors(chatController.getUsersChannels));
+
 router.get('/api/users', catchErrors(userController.apiShowUsers));
 
 module.exports = router;

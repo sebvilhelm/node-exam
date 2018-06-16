@@ -88,3 +88,20 @@ exports.addMessage = async ({ userId, channelId, content }) => {
   await Promise.all([message.setUser(userId, { save: false }), message.setChannel(channelId, { save: false })]);
   return message.save();
 };
+
+exports.getUsersChannels = async (req, res) => {
+  const user = await User.findById(req.user.id);
+  const channels = await user.getChannels({
+    include: [
+      {
+        model: User,
+        where: {
+          id: {
+            [$.ne]: req.user.id,
+          },
+        },
+      },
+    ],
+  });
+  res.render('chatList', { title: 'My chats', channels });
+};

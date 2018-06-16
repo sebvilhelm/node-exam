@@ -17,13 +17,10 @@ html(lang="en")
               .nav__spacer(aria-hidden="true")
               if user
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/users') ? 'nav__link--active' : '') href="/users") Users
+                li.nav__item: a.nav__link(class=(currentPath.startsWith('/my-chats') ? 'nav__link--active' : '') href="/my-chats") My Chats
                 li.nav__item: a.nav__link(class=(currentPath.startsWith('/logout') ? 'nav__link--active' : '') href="/logout") Logout
                 li.nav__item: span.nav__link.nav__link--image(class=(currentPath.startsWith('/profile') ? 'nav__link--image--active' : '') href="/profile")
-                  if user.photo
-                    - const photoSrc = user.photo.startsWith('http') ? user.photo : `/uploads/users/${user.photo}`
-                    img.avatar(src=user.photo alt=`${user.name}'s profile image`)
-                  else
-                    img.avatar(src="/images/profile-placeholder.png" alt="Placeholder user image")
+                  img.avatar(src=h.avatar(user.photo) alt=`${user.name}'s avatar`)
 
 
               else

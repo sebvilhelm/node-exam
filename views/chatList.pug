@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .inner
+    h1 My chats
+    if channels
+      ul.chat-list
+        each channel in channels
+          li.chat-list__item
+            .chat-card
+              h2.chat-card__title Chat with:
+              if channel.users
+                each user in channel.users
+                  img(src=h.avatar(user.photo) alt=`${user.name}'s photo`)
+              a.button(href=`/chat/${channel.id}`) Go to chat

@@ -9,11 +9,7 @@ block content
           li.user-list__item
             .user-card
               h2.user-card__title= user.name
-              if user.photo
-                  - const photoSrc = user.photo.startsWith('http') ? user.photo : `/uploads/users/${user.photo}`
-                  img.user-card__avatar(src=user.photo alt=`${user.name}'s profile image`)
-              else
-                img.user-card__avatar(src="/images/profile-placeholder.png" alt="Placeholder user image")
+              img.user-card__avatar(src=h.avatar(user.photo) alt="Placeholder user image")
               form(action="/chat" method="post")
                 input(type="hidden", name="userId" value=user.id)
                 button.button(type="submit") Start chat
