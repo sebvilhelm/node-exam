@@ -7,7 +7,10 @@ exports.getGlobalChat = async (req, res) => {
   const channel = await Channel.findOne({ where: { id: 1 } });
   const messages = await channel.getMessages({ include: [User] });
   // 2. Render the template
-  res.render('chat', { title: 'Global Chat', chat: { id: channel.id, messages } });
+  res.render('chat', {
+    title: 'Global Chat',
+    chat: { id: channel.id, messages },
+  });
 };
 
 exports.channelExists = async (req, res, next) => {
@@ -28,8 +31,7 @@ exports.addChannel = async (req, res) => {
 };
 
 exports.showChannel = async (req, res) => {
-  // TODO: get all messages belonging to the channel
-  const chat = await Channel.findOne({
+  const channel = await Channel.findOne({
     where: { id: req.params.id },
     include: [
       {
@@ -43,11 +45,14 @@ exports.showChannel = async (req, res) => {
     ],
   });
 
-  const {
-    users: [{ name }],
-  } = chat;
+  const messages = await channel.getMessages({ include: [User] });
 
-  res.render('chat', { title: `Chat with ${name}`, chat });
+  const {
+    id,
+    users: [{ name }],
+  } = channel;
+
+  res.render('chat', { title: `Chat with ${name}`, chat: { id, messages } });
 };
 
 const getUserId = socket => {

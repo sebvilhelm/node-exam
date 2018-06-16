@@ -4,17 +4,18 @@ block content
   .inner
     h1= title
     #chatWindow.chat__window
-      each message in chat.messages
-        -const isCurrentUser = user.id === message.user.id;
-        .chat__message(class=(isCurrentUser ? 'chat__message--self': ''))
-          if message.user.photo
-            img.chat__avatar(src=(message.user.photo))
-          else
-            img.chat__avatar(src="images/profile-placeholder.png" alt="Placeholder user image")
-          p.chat__meta
-            span.chat__name(class=(isCurrentUser ? 'chat__name--self': ''))= isCurrentUser ? 'Me': message.user.name
-            span.chat__date-time= message.created_at
-          p.chat__content= message.content
+      if chat.messages
+        each message in chat.messages
+          -const isCurrentUser = user.id === message.user.id;
+          .chat__message(class=(isCurrentUser ? 'chat__message--self': ''))
+            if message.user.photo
+              img.chat__avatar(src=(message.user.photo))
+            else
+              img.chat__avatar(src="/images/profile-placeholder.png" alt="Placeholder user image")
+            p.chat__meta
+              span.chat__name(class=(isCurrentUser ? 'chat__name--self': ''))= isCurrentUser ? 'Me': message.user.name
+              span.chat__date-time= message.created_at
+            p.chat__content= message.content
     input(type="hidden" name="channelId" value=chat.id)
     form#messageForm.form(action="POST")
       label.label Your Message

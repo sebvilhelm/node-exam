@@ -23,7 +23,7 @@ html(lang="en")
                     - const photoSrc = user.photo.startsWith('http') ? user.photo : `/uploads/users/${user.photo}`
                     img.avatar(src=user.photo alt=`${user.name}'s profile image`)
                   else
-                    img.avatar(src="images/profile-placeholder.png" alt="Placeholder user image")
+                    img.avatar(src="/images/profile-placeholder.png" alt="Placeholder user image")
 
 
               else

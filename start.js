@@ -10,7 +10,7 @@ require('./handlers/websocket')(io);
 const port = process.env.PORT || 3000;
 
 const options = {
-  force: true, // TRUE: drop existing tables if they exist
+  force: false, // TRUE: drop existing tables if they exist
 };
 
 sequelize
