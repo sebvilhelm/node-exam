@@ -29,12 +29,7 @@ router.get('/login', userController.loginForm);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 
-router.post(
-  '/chat',
-  authController.isLoggedIn,
-  catchErrors(chatController.channelExists),
-  catchErrors(chatController.addChannel)
-);
+router.post('/chat', authController.isLoggedIn, catchErrors(chatController.addChannel));
 router.get('/chat/:id', authController.isLoggedIn, catchErrors(chatController.showChannel));
 
 router.get('/chat', authController.isLoggedIn, catchErrors(chatController.getGlobalChat));

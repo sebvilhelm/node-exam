@@ -24,9 +24,8 @@ exports.channelExists = async (req, res, next) => {
 };
 
 exports.addChannel = async (req, res) => {
-  const channel = new Channel();
-  await channel.save();
-  await channel.addUsers([req.user.id, req.body.userId]);
+  const channel = await Channel.create();
+  await channel.setUsers([req.user.id, req.body.userId]);
   res.redirect(`/chat/${channel.id}`);
 };
 

@@ -16,7 +16,12 @@ const options = {
 sequelize
   .sync(options)
   // Create global chat room, if it doesn't exist
-  .then(() => sequelize.models.channel.findOrCreate({ where: { id: 1 } }))
+  .then(async () => {
+    const globalChat = await sequelize.models.channel.find({ where: { id: 1 } });
+    if (!globalChat) {
+      await sequelize.models.channel.create();
+    }
+  })
   .then(() => {
     server.listen(port);
   })
